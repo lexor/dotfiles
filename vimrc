@@ -12,6 +12,7 @@ call plug#begin('~/.vim/plugged')
 " Visual
 Plug 'junegunn/seoul256.vim'           " Best color scheme <3
 Plug 'vim-airline/vim-airline'         " Improved status line
+Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/nerdtree'             " Adds file browser window
 Plug 'scrooloose/nerdcommenter'        " Powerful comment functions
 Plug 'junegunn/vim-easy-align'
@@ -424,3 +425,4 @@ nmap <Leader>hu <Plug>GitGutterUndoHunk
 "------------------------------------------------------------------------------
 let g:prettier#autoformat = 0
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html Prettier
+
