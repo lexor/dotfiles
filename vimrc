@@ -42,6 +42,16 @@ Plug 'spf13/vim-autoclose'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
+" Languages
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'tpope/vim-rails'
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'mxw/vim-jsx'
+Plug 'elzr/vim-json', {'for' : 'json'}
+Plug 'ekalinin/Dockerfile.vim', {'for' : 'Dockerfile'}
+Plug 'cespare/vim-toml'
+
 call plug#end()
 
 
@@ -389,6 +399,12 @@ let g:tagbar_type_go = {
 
 
 "------------------------------------------------------------------------------
+" Vim-json
+"------------------------------------------------------------------------------
+let g:vim_json_syntax_conceal = 0
+
+
+"------------------------------------------------------------------------------
 " Cursors
 " http://vim.wikia.com/wiki/Change_cursor_shape_in_different_modes
 "------------------------------------------------------------------------------
@@ -428,4 +444,5 @@ nmap <Leader>hu <Plug>GitGutterUndoHunk
 "------------------------------------------------------------------------------
 let g:prettier#autoformat = 0
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html Prettier
+
 
