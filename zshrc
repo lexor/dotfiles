@@ -6,8 +6,8 @@ plugins=(
 )
 
 alias vim="nvim"
-alias gcode="cd ~/code"
-alias gdev="cd ~/dev"
+alias kod="cd ~/code"
+alias dev="cd ~/dev"
 
 # Laravel Homestead
 function homestead() {
