@@ -1,0 +1,77 @@
+# Remap prefix 'C-b' to 'C-a'
+unbind C-b
+set-option -g prefix C-a
+bind-key C-a send-prefix
+
+# Set status bar
+set -g status-bg black
+set -g status-fg white
+
+# Reload config
+bind r source-file ~/.tmux.conf \; display "Reloaded!"
+
+# Pane selection
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R
+
+# Resize Pane
+bind -r Left resize-pane -L 10
+bind -r Right resize-pane -R 10
+bind -r Down resize-pane -D 5
+bind -r Up resize-pane -U 5
+
+# Window moving
+bind -r C-h swap-window -t :-
+bind -r C-l swap-window -t :+
+
+# Window selection
+bind -r [ select-window -t :-
+bind -r ] select-window -t :+
+
+# Mouse
+setw -g mouse on
+
+# Splits
+bind \ split-window -h
+bind - split-window -v
+
+# History
+set -g history-limit 20000
+
+# Escape Lag Fix
+set -sg escape-time 0
+
+# Set Titles
+set-option -g set-titles on
+set-option -g set-titles-string '#I #W'
+set-window-option -g automatic-rename on
+
+# Status Bar
+set -g status-bg 'colour235'
+set -g message-command-fg 'colour222'
+set -g status-justify 'centre'
+set -g status-left-length '100'
+set -g status 'on'
+set -g pane-active-border-fg 'colour154'
+set -g message-bg 'colour238'
+set -g status-right-length '100'
+set -g status-right-attr 'none'
+set -g message-fg 'colour222'
+set -g message-command-bg 'colour238'
+set -g status-attr 'none'
+# set -g status-utf8 'on'
+set -g pane-border-fg 'colour238'
+set -g status-left-attr 'none'
+setw -g window-status-fg 'colour121'
+setw -g window-status-attr 'none'
+setw -g window-status-activity-bg 'colour235'
+setw -g window-status-activity-attr 'none'
+setw -g window-status-activity-fg 'colour154'
+setw -g window-status-separator ''
+setw -g window-status-bg 'colour235'
+set -g status-left '#[fg=colour232,bg=colour154] #S #[fg=colour154,bg=colour238,nobold,nounderscore,noitalics]#[fg=colour222,bg=colour238] #W #[fg=colour238,bg=colour235,nobold,nounderscore,noitalics]#[fg=colour121,bg=colour235] #(whoami)  #(uptime  | cut -d " " -f 1,2,3) #[fg=colour235,bg=colour235,nobold,nounderscore,noitalics]'
+set -g status-right '#[fg=colour235,bg=colour235,nobold,nounderscore,noitalics]#[fg=colour121,bg=colour235] %r  %a  %Z #[fg=colour238,bg=colour235,nobold,nounderscore,noitalics]#[fg=colour222,bg=colour238] #H #[fg=colour154,bg=colour238,nobold,nounderscore,noitalics]#[fg=colour232,bg=colour154] #(rainbarf --battery --remaining --no-rgb) '
+setw -g window-status-format '#[fg=colour235,bg=colour235,nobold,nounderscore,noitalics]#[default] #I  #W #[fg=colour235,bg=colour235,nobold,nounderscore,noitalics]'
+setw -g window-status-current-format '#[fg=colour235,bg=colour238,nobold,nounderscore,noitalics]#[fg=colour222,bg=colour238] #I  #W  #F #[fg=colour238,bg=colour235,nobold,nounderscore,noitalics]'
