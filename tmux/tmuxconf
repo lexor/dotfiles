@@ -1,0 +1,135 @@
+# vim: set foldmethod=marker foldlevel=0:
+
+# Core {{{
+
+
+# Enable 256 color
+set -g default-terminal "xterm-256color"
+set -ga terminal-overrides ",*256col*:Tc"
+
+# Vi mode
+#set-window-option -g mode-keys vi
+set-window-option -g xterm-keys on
+
+# Remap prefix 'C-b' to 'C-a'
+unbind C-b
+set-option -g prefix C-a
+bind-key C-a send-prefix
+
+# Make windows / panes index start with 1
+set -g base-index 1
+setw -g pane-base-index 1
+
+# Don't rename windows automatically
+set-option -g allow-rename off
+
+# Reload config
+bind r source-file $DOTFILES/tmux/tmuxconf \; display "Reloaded!"
+
+# }}}
+# Splits {{{
+
+
+# Pane selection
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R
+
+# Resize Pane
+bind -r Left resize-pane -L 10
+bind -r Right resize-pane -R 10
+bind -r Down resize-pane -D 5
+bind -r Up resize-pane -U 5
+
+# Window moving
+bind -r C-h swap-window -t :-
+bind -r C-l swap-window -t :+
+
+# Window selection
+bind -r [ select-window -t :-
+bind -r ] select-window -t :+
+
+# Mouse
+setw -g mouse on
+
+# Splits
+bind \ split-window -h
+bind - split-window -v
+
+# History
+set -g history-limit 20000
+
+# Escape Lag Fix
+set -sg escape-time 0
+
+# Visual notification of activity in other windows
+setw -g monitor-activity on
+
+# }}}
+# Theme {{{
+
+# Status bar config
+set -g status on
+set -g status-position bottom
+set -g status-interval 1
+set -g status-justify "left"
+set -g status-left-length 200
+set -g status-right-length 200
+
+# Pane border
+set -g pane-border-fg brightblack
+set -g pane-active-border-fg blue
+
+# Show border on top
+# setw -g pane-border-status bottom
+setw -g pane-border-format '─'
+
+# Status bar colors
+set -g status-fg brightwhite
+set -g status-bg black
+set -g message-fg yellow
+set -g message-bg black
+
+# Window items
+setw -g window-status-format "#[bg=black, noreverse]#{?window_activity_flag,#[fg=red]⋅ ,#[fg=colour235]}#I #W"
+setw -g window-status-current-format "#[fg=brightcyan bold, bg=black, noreverse]#I #{?window_zoomed_flag,[#W],#W}"
+setw -g window-status-separator '#[fg=colour235] | '
+setw -g window-status-current-attr dim
+setw -g window-status-bg green
+setw -g window-status-fg black
+
+set -g window-status-attr reverse
+set -g window-status-activity-attr none
+
+# Make this shit happen
+set -g status-left "#[fg=yellow] ♜ #[fg=yellow nobold] #S #[fg=colour235] | " # lol || #S
+
+# Show when prefix is selected + right segments
+set -g status-right "#{?client_prefix,#[fg=blue bold]^A #[fg=colour237 nobold]|#[bg=default fg=default],}#($DOTFILES/tmux/right_segments.sh)"
+
+# }}}
+# Screensaver \ Lockscreen? {{{
+
+bind-key S new-session "pipes" \; \
+  set-window-option status off \; \
+  set-window-option pane-border-status off
+
+# }}}
+# Plugins {{{
+
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+# set -g @plugin 'tmux-plugins/tmux-continuum'
+# set -g @plugin 'yardnsm/tmux-1password'
+set -g @plugin 'christoomey/vim-tmux-navigator'
+
+# Plugins configuration
+set -g @resurrect-capture-pane-contents 'on'
+
+# set -g @continuum-boot 'on'
+# set -g @continuum-boot-options 'iterm,fullscreen'
+# set -g @continuum-restore 'on'
+
+# Initialize TPM
+run -b '~/.tmux/plugins/tpm/tpm'
+# }}}
