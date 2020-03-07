@@ -51,8 +51,8 @@ segment_music() {
   [[ $(command -v osascript) ]] \
     || return 1
 
-  spotify="$(osascript "$DOTFILES"/scripts/spotify.scpt)"
-  is_playing="$(osascript "$DOTFILES"/scripts/spotify_is_playing.scpt)"
+  spotify="$(osascript "$DOTFILES"/.misc/applescripts/spotify.scpt)"
+  is_playing="$(osascript "$DOTFILES"/.misc/applescripts/spotify_is_playing.scpt)"
 
   # Animate the music icon cuz i got no life
   # ¯\_(ツ)_/¯
