@@ -399,6 +399,18 @@ augroup vimrc
 augroup END
 
 " }}}
+" Vim-Go {{{
+
+
+let g:go_term_mode = "split"
+let g:go_fold_enable = ['block', 'import', 'varconst', 'package_comment']
+
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+let g:go_rename_command='gopls'
+let g:ale_go_golangci_lint_options = ''
+
+" }}}
 " FZF {{{
 
 
