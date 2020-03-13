@@ -1,0 +1,1 @@
+/Users/emredeger/.fzf/shell/key-bindings.fish
