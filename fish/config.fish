@@ -1,3 +1,5 @@
+set -x LC_ALL en_US.UTF-8
+set -x LANG en_US.UTF-8
 
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
