@@ -5,7 +5,7 @@ set -q XDG_DATA_HOME
 
 # Load Oh My Fish configuration.
 source $OMF_PATH/init.fish
-source $HOME/.config/fish/functions/key-bindings.fish
+
 source $HOME/.cargo/env
 
 set -x EDITOR vim
@@ -31,10 +31,11 @@ alias dev "cd ~/dev"
 
 # Git
 alias push "git push"
+alias gaa "git add ."
 alias gp "git pull"
 alias gs "git status"
 alias ga "git add"
-alias gc "git commit -m"
+alias gc "git commit -S -v -s"
 alias gce "git commit --amend"
 alias gstp "git subtree push --prefix"
 alias glo "git log --graph --pretty=format:'%C(blue)%h%C(red)%d %C(green)%ar %C(white)%s %C(yellow)(%an)' --abbrev-commit --date=relative"
