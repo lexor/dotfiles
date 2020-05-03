@@ -154,17 +154,14 @@ draw_bold_text_with_bright_colors: true
 
 # Colors (Tomorrow Night)
 colors:
-  # Default colors
   primary:
     background: "0x1d1f21"
     foreground: "0xc5c8c6"
 
-  # Colors the cursor will use if `custom_cursor_colors` is true
   cursor:
     text: "0x1d1f21"
     cursor: "0xffffff"
 
-  # Normal colors
   normal:
     black: "0x1d1f21"
     red: "0xcc6666"
@@ -175,7 +172,6 @@ colors:
     cyan: "0x70c0ba"
     white: "0x373b41"
 
-  # Bright colors
   bright:
     black: "0x666666"
     red: "0xff3334"

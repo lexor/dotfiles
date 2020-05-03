@@ -46,6 +46,7 @@ Plug 'spf13/vim-autoclose'
 
 " Colorschemes
 Plug 'chriskempson/base16-vim'
+Plug 'arcticicestudio/nord-vim'
 
 call plug#end()
 
@@ -55,6 +56,7 @@ call plug#end()
 
 set background=dark
 colorscheme base16-tomorrow-night
+
 let g:airline_theme = "minimalist"
 let g:airline_powerline_fonts=1
 
