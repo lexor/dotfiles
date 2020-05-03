@@ -2,7 +2,7 @@ export ZSH=/Users/$USER/.oh-my-zsh
 
 ZSH_THEME=geoffgarside
 
-plugins=(git colored-man-pages zsh-completions fzf)
+plugins=(git colored-man-pages fzf)
 source "$ZSH/oh-my-zsh.sh"
 
 PROMPT='%{$fg[green]%}%c%{$reset_color%}$(git_prompt_info) %{$fg[yellow]%}%(!.#.$)%{$reset_color%} '
@@ -51,7 +51,7 @@ if [[ -d "$HOMEBREW/share/zsh-syntax-highlighting" ]]; then
 	source "$HOMEBREW/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 fi
 if [[ -d "$HOMEBREW/share/zsh-autosuggestions" ]]; then
-	# source "$HOMEBREW/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+	source "$HOMEBREW/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 fi
 
 PATH="${HOME}/go/bin:${PATH}"
