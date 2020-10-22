@@ -27,6 +27,7 @@ export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_INSECURE_REDIRECT=1
 
 PATH="$HOMEBREW/bin:$HOMEBREW/sbin:$PATH"
+PATH="$HOME/.composer/vendor/bin:$PATH"
 
 # Add zsh completion scripts installed via Homebrew
 fpath=("$HOMEBREW/share/zsh-completions" $fpath)
@@ -62,9 +63,11 @@ if command -v direnv > /dev/null; then
 fi
 
 # nvm
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+ export NVM_DIR="$HOME/.nvm"
+ [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+ [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # finally, export the PATH
 export PATH
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
