@@ -25,3 +25,6 @@ alias cat="bat"
 
 # Laravel
 alias a="php artisan"
+
+# PHP
+alias c="composer"
