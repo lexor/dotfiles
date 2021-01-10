@@ -71,3 +71,5 @@ fi
 export PATH
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+if [ "$TMUX" = "" ]; then tmux attach -t emredeger || tmux new -s emredeger; fi
