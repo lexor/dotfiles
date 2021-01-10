@@ -18,6 +18,7 @@ alias undocommit="git reset HEAD~"
 alias undopush="git push -f origin HEAD^:master" # Undo a `git push`
 alias master="git checkout master && git pull"
 alias dev="git checkout develop && git pull"
+alias lg="lazygit"
 
 # Bat
 alias cat="bat"
