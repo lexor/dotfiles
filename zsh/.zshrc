@@ -1,13 +1,14 @@
 export ZSH=/Users/$USER/.oh-my-zsh
 
 ZSH_THEME=geoffgarside
+# ZSH_THEME=lambda
 
 plugins=(git colored-man-pages fzf)
 source "$ZSH/oh-my-zsh.sh"
 
 PROMPT='%{$fg[green]%}%c%{$reset_color%}$(git_prompt_info) %{$fg[yellow]%}%(!.#.$)%{$reset_color%} '
 
-export UPDATE_ZSH_DAYS=14
+export UPDATE_ZSH_DAYS=7
 export DISABLE_UPDATE_PROMPT=true # accept updates by default
 
 if [[ -n $SSH_CONNECTION ]]; then
@@ -63,13 +64,20 @@ if command -v direnv > /dev/null; then
 fi
 
 # nvm
- export NVM_DIR="$HOME/.nvm"
- [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
- [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# export NVM_LAZY_LOAD=true
+# export NVM_COMPLETION=true
+# export NVM_DIR="$HOME/.nvm"
+#  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+#  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # finally, export the PATH
 export PATH
 
+# Dotfiles
+export DOTFILES="$HOME/workspace/dotfiles"
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export LSCOLORS="Gxfxcxdxbxegedabagacad"
 
 if [ "$TMUX" = "" ]; then tmux attach -t emredeger || tmux new -s emredeger; fi
