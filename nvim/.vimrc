@@ -16,10 +16,10 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'Yggdroot/indentLine'
 " Make sure `ctags` and `gotags` are installed
-Plug 'majutsushi/tagbar',
+" "Plug 'majutsushi/tagbar',
 Plug 'terryma/vim-multiple-cursors'
 
-Plug 'ryanoasis/vim-webdevicons'
+" Plug 'ryanoasis/vim-webdevicons'
 
 " Languages
 Plug 'fatih/vim-go'
@@ -35,7 +35,7 @@ Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 Plug 'tpope/vim-fugitive'              " Adds :Gstatus, :Gcommit, :Gdiff and more
 Plug 'airblade/vim-gitgutter'          " Shows unstaged lines on the file
 Plug 'junegunn/gv.vim'                 " Adds :GV command for viewing git logs
-" Plug 'xuyuanp/nerdtree-git-plugin'     " Shows git status in the nerd tree
+Plug 'xuyuanp/nerdtree-git-plugin'     " Shows git status in the nerd tree
 Plug 'tpope/vim-rhubarb'               " Adds :Gbrowse for opening in Github
 
 " Braces
@@ -152,7 +152,7 @@ set number
 set showcmd
 
 " A buffer becomes hidden when it is abandoned
-set hid
+" set hid
 
 " Configure backspace so it acts as it should act
 set backspace=eol,start,indent
