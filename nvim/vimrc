@@ -1,6 +1,6 @@
 " vim: set foldmethod=marker foldlevel=0:
 
-" Plugins {{{
+" plugins {{{
 
 
 call plug#begin('~/.vim/plugged')
@@ -13,57 +13,30 @@ Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'Yggdroot/indentLine'
-" Make sure `ctags` and `gotags` are installed
-" "Plug 'majutsushi/tagbar',
-Plug 'terryma/vim-multiple-cursors'
-
-" Plug 'ryanoasis/vim-webdevicons'
 
 " Languages
 Plug 'fatih/vim-go'
-Plug 'leafgarland/typescript-vim'
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
-Plug 'editorconfig/editorconfig-vim'
-Plug 'jparise/vim-graphql'
+" Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
 " Linter and Completion
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'editorconfig/editorconfig-vim'
 
 " Git
-Plug 'tpope/vim-fugitive'              " Adds :Gstatus, :Gcommit, :Gdiff and more
-Plug 'airblade/vim-gitgutter'          " Shows unstaged lines on the file
-Plug 'junegunn/gv.vim'                 " Adds :GV command for viewing git logs
-Plug 'xuyuanp/nerdtree-git-plugin'     " Shows git status in the nerd tree
-Plug 'tpope/vim-rhubarb'               " Adds :Gbrowse for opening in Github
+Plug 'airblade/vim-gitgutter'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'tpope/vim-fugitive'
 
-" Braces
-Plug 'junegunn/rainbow_parentheses.vim'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-endwise'
-Plug 'spf13/vim-autoclose'
+" Plug 'ctrlpvim/ctrlp.vim' " fuzzy find files
 
-" Colorschemes
-Plug 'chriskempson/base16-vim'
-Plug 'arcticicestudio/nord-vim'
+" Color schemes
+Plug 'morhetz/gruvbox'
 
 call plug#end()
 
 " }}}
-" Color Scheme {{{
+" color scheme {{{
 
-
-set background=dark
-colorscheme base16-tomorrow-night
-
-let g:airline_theme = "minimalist"
-let g:airline_powerline_fonts=1
-
-if (has("nvim"))
-  "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-endif
 
 "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
 "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
@@ -72,16 +45,28 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
+if (has("nvim"))
+  "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+endif
+
+let g:gruvbox_contrast_dark = "hard"
+let g:gruvbox_contrast_light = "hard"
+colorscheme gruvbox
+
 " }}}
-" General {{{
+" general {{{
 
 
 " Encoding
 set encoding=utf8
+
 " let's make sure we are in noncompatble mode
 set nocp
 
-" Sets how many lines of history VIM has to remember
+" We show the mode with airline or lightline
+set noshowmode
+
 set history=700
 
 " Enable filetype plugins
@@ -107,20 +92,18 @@ inoremap jj <esc>
 nnoremap JJJJ <nop>
 
 " }}}
-" Interface {{{
+" interface {{{
 
 
 " Make sure that coursor is always vertically centered on j/k moves
 set so=999
 
 " add vertical lines on columns
-"set colorcolumn=80,120
+set colorcolumn=80,120
 
-" Avoid garbled characters in Chinese language windows OS
+" Avoid garbled characters
 let $LANG='en'
 set langmenu=en
-source $VIMRUNTIME/delmenu.vim
-source $VIMRUNTIME/menu.vim
 
 " Turn on the WiLd menu
 set wildmenu
@@ -204,16 +187,10 @@ set nrformats=octal,hex,alpha
 
 " Display hidden chars
 set list
-set listchars=tab:\|\ ",eol:¬
+set listchars=tab:\|\ ,eol:¬
 
 " }}}
-" Tab and Indent {{{
-
-
-set tabstop=4 softtabstop=4 shiftwidth=4 expandtab autoindent smartindent
-
-" }}}
-" Visual Mode Releated {{{
+" visual mode releated {{{
 
 
 " Visual mode pressing * or # searches for the current selection
@@ -222,7 +199,7 @@ vnoremap <silent> * :call VisualSelection('f', '')<CR>
 vnoremap <silent> # :call VisualSelection('b', '')<CR>
 
 " }}}
-" Moving around, tabs, windows and buffers {{{
+" moving around, tabs, windows and buffers {{{
 
 
 " Treat long lines as break lines (useful when moving around in them)
@@ -276,6 +253,9 @@ try
 catch
 endtry
 
+" Add status line support, for integration with other plugin, checkout `:h coc-status`
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
 " Return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
      \ if line("'\"") > 0 && line("'\"") <= line("$") |
@@ -292,7 +272,7 @@ set viminfo^=%
 " let NERDTreeDirArrows=1
 let NERDTreeMapActivateNode='<space>'
 let NERDTreeMinimalUI=1
-let NERDTreeIgnore=['\.o$', '\.pyc$', '\.php\~$', '__pycache__', '\.swp$']
+let NERDTreeIgnore=['\.o$', '\.pyc$', '\.php\~$', '__pycache__', '\.swp$', '^.git$', '^node_modules$', '^vendor$']
 let NERDTreeWinSize = 35
 let NERDTreeShowHidden=1
 
@@ -306,8 +286,30 @@ let NERDTreeChDirMode = 2
 let NERDTreeShowLineNumcers = 1
 let NERDTreeAutoCenter = 1
 
+let g:NERDTreeGitStatusWithFlags = 1
+
 " Open NERDTree on startup, when no file has been specified
 autocmd VimEnter * if !argc() | NERDTree | endif
+
+" Check if NERDTree is open or active
+function! IsNERDTreeOpen()
+  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+endfunction
+
+" Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
+" file, and we're not in vimdiff
+function! SyncTree()
+  if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
+    NERDTreeFind
+    wincmd p
+  endif
+endfunction
+
+" Highlight currently open buffer in NERDTree
+autocmd BufRead * call SyncTree()
+
+" Highlight currently open buffer in NERDTree
+" autocmd BufEnter * call SyncTree()
 
 " Locate file in hierarchy quickly
 map <leader>T :NERDTreeFind<cr>
@@ -319,14 +321,28 @@ nmap <leader>o :NERDTreeToggle<cr>
 " COC {{{
 
 
+" config
+let g:coc_global_extensions = [
+  \ 'coc-snippets',
+  \ 'coc-pairs',
+  \ 'coc-tsserver',
+  \ 'coc-eslint',
+  \ 'coc-prettier',
+  \ 'coc-json',
+  \ ]
+
 " if hidden is not set, TextEdit might fail.
 set hidden
+
 " Better display for messages
 set cmdheight=2
+
 " Smaller updatetime for CursorHold & CursorHoldI
 set updatetime=300
+
 " don't give |ins-completion-menu| messages.
 set shortmess+=c
+
 " always show signcolumns
 set signcolumn=yes
 
@@ -386,31 +402,51 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 " this is handled by LanguageClient [LC]
 let g:go_def_mapping_enabled = 0
 
-" }}}
-" Rainbow parentheses {{{
+" prettier command for coc
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
+" Remap for rename current word
+nmap <F2> <Plug>(coc-rename)
 
-let g:rainbow#max_level = 16
-let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
+" Remap for format selected region
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
 
-" List of colors that you do not want. ANSI code or #RRGGBB
-let g:rainbow#blacklist = [168, 10, 230, 144, 186, 187]
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
 
-augroup vimrc
-  autocmd FileType lisp,clojure,scheme,go,python,javascript RainbowParentheses
-augroup END
+" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
 
-" }}}
-" Vim-Go {{{
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
 
+" Create mappings for function text object, requires document symbols feature of languageserver.
+xmap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap if <Plug>(coc-funcobj-i)
+omap af <Plug>(coc-funcobj-a)
 
-let g:go_term_mode = "split"
-let g:go_fold_enable = ['block', 'import', 'varconst', 'package_comment']
+" Use <C-d> for select selections ranges, needs server support, like: coc-tsserver, coc-python
+nmap <silent> <C-d> <Plug>(coc-range-select)
+xmap <silent> <C-d> <Plug>(coc-range-select)
 
-let g:go_def_mode='gopls'
-let g:go_info_mode='gopls'
-let g:go_rename_command='gopls'
-let g:ale_go_golangci_lint_options = ''
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
+" Use `:Fold` to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" use `:OR` for organize import of current buffer
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
 " }}}
 " FZF {{{
