@@ -32,3 +32,6 @@ alias a="php artisan"
 
 # PHP
 alias c="composer"
+
+alias hidedock="defaults write com.apple.dock autohide -bool true && killall Dock"
+alias showdock="defaults write com.apple.dock autohide -bool false && killall Dock"
