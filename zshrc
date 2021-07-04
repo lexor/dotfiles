@@ -203,5 +203,8 @@ if type bat &> /dev/null; then
   export BAT_THEME=ansi
 fi
 
+if type exa &> /dev/null; then
+  alias ls=exa
+fi
 
 if [ "$TMUX" = "" ]; then tmux -u attach -t main || tmux -u new -s main; fi
