@@ -2,6 +2,10 @@
 alias vim="nvim"
 alias cl="clear;clear"
 
+# General
+alias lls='ls -lh --sort=size --reverse'
+alias llt='ls -l -snew'
+
 # Git
 alias gc="_git_dbg commit -S -v -s"
 alias gs="_git_dbg status -s -b"
