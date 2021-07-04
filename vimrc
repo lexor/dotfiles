@@ -95,7 +95,7 @@ set encoding=utf8
 set nocp
 
 " We show the mode with airline or lightline
-set noshowmode
+" set noshowmode
 
 set history=700
 
@@ -121,6 +121,10 @@ command W w !sudo tee % > /dev/null
 inoremap jj <esc>
 nnoremap JJJJ <nop>
 
+set statusline=%<\ %{mode()}\ \|\ %f%m\ \|\ %{fugitive#statusline()\ }
+set statusline+=%{&paste?'\ \ \|\ PASTE\ ':'\ '}
+set statusline+=%=\ %{&fileformat}\ \|\ %{&fileencoding}\ \|\ %{&filetype}\ \|\ %l/%L\(%c\)\
+
 " }}}
 " interface {{{
 
@@ -129,7 +133,7 @@ nnoremap JJJJ <nop>
 set so=999
 
 " add vertical lines on columns
-set colorcolumn=80,120
+set colorcolumn=80
 
 " Avoid garbled characters
 let $LANG='en'
@@ -483,5 +487,25 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 
 
 nmap <c-p> :FZF<CR>
+
+let g:fzf_colors =
+\ { "fg":      ["fg", "Normal"],
+  \ "bg":      ["bg", "Normal"],
+  \ "hl":      ["fg", "IncSearch"],
+  \ "fg+":     ["fg", "CursorLine", "CursorColumn", "Normal"],
+  \ "bg+":     ["bg", "CursorLine", "CursorColumn"],
+  \ "hl+":     ["fg", "IncSearch"],
+  \ "info":    ["fg", "IncSearch"],
+  \ "border":  ["fg", "Ignore"],
+  \ "prompt":  ["fg", "Comment"],
+  \ "pointer": ["fg", "IncSearch"],
+  \ "marker":  ["fg", "IncSearch"],
+  \ "spinner": ["fg", "IncSearch"],
+  \ "header":  ["fg", "WildMenu"] }
+
+" Hide statusline
+autocmd! FileType fzf
+autocmd  FileType fzf set laststatus=0 noshowmode noruler
+  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
 " }}}
