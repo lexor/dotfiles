@@ -28,6 +28,10 @@ alias master="_git_dbg checkout master && git pull"
 alias dev="_git_dbg checkout develop && git pull"
 alias lg="lazygit"
 
+# Tmux
+alias tma='tmux -u attach -t'
+alias tmn='tmux -u new -s'
+
 # Bat
 alias cat="bat"
 
