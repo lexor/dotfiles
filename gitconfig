@@ -1,0 +1,45 @@
+[user]
+	name = Emre DEĞER
+	email = ben@emre.dev
+	signingkey = 863EFEB0E78AE490
+
+[gpg]
+	program = gpg
+
+[core]
+  # pager = delta
+	editor = nvim
+	excludesfile = /Users/emredeger/.gitignore_global
+
+[interactive]
+	diffFilter = delta --color-only --width 100
+
+[diff]
+	colorMoved = default
+
+[delta]
+	features = line-numbers decorations
+	whitespace-error-style = 22 reverse
+  syntax-theme = Monokai Extended
+
+[delta "decorations"]
+	commit-decoration-style = bold yellow box ul
+	file-style = bold yellow ul
+	file-decoration-style = none
+
+[commit]
+	gpgsign = true
+
+[sequence]
+	editor = interactive-rebase-tool
+
+[pull]
+	ff = only
+
+[init]
+	defaultBranch = main
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

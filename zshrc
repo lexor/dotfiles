@@ -31,6 +31,7 @@ fi
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_INSECURE_REDIRECT=1
 
+PATH=/opt/homebrew/bin:$PATH
 PATH="$HOMEBREW/bin:$HOMEBREW/sbin:$PATH"
 PATH="$HOME/.composer/vendor/bin:$PATH"
 
@@ -38,16 +39,19 @@ PATH="$HOME/.composer/vendor/bin:$PATH"
 fpath=("$HOMEBREW/share/zsh-completions" $fpath)
 fpath=("$HOMEBREW/share/zsh/site-functions" $fpath)
 
+# Dotfiles
+export DOTFILES="$HOME/.dotfiles"
+
 # Load custom functions
-if [[ -f "$HOME/workspace/dotfiles/zsh/functions.zsh" ]]; then
-	source "$HOME/workspace/dotfiles/zsh/functions.zsh"
+if [[ -f "$DOTFILES/functions.zsh" ]]; then
+	source "$DOTFILES/functions.zsh"
 else
 	echo >&2 "WARNING: can't load shell functions"
 fi
 
 # Load custom aliases
-if [[ -f "$HOME/workspace/dotfiles/zsh/aliases.zsh" ]]; then
-	source "$HOME/workspace/dotfiles/zsh/aliases.zsh"
+if [[ -f "$DOTFILES/aliases.zsh" ]]; then
+	source "$DOTFILES/aliases.zsh"
 else
 	echo >&2 "WARNING: can't load shell aliases"
 fi
@@ -76,9 +80,6 @@ fi
 
 # finally, export the PATH
 export PATH
-
-# Dotfiles
-export DOTFILES="$HOME/workspace/dotfiles"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -136,4 +137,71 @@ RPROMPT='$(check_last_exit_code)'
 
 export LSCOLORS="Gxfxcxdxbxegedabagacad"
 
-if [ "$TMUX" = "" ]; then tmux attach -t main || tmux new -s main; fi
+kitty_dark_theme="$HOME/.dotfiles/kitty_theme_gruvbox_dark_hard.conf"
+kitty_light_theme="$HOME/.dotfiles/kitty_colors_lucius_white_high_contrast.conf"
+kitty_theme_symlink="$HOME/.config/kitty/theme.conf"
+
+if [ "$(readlink -- "${kitty_theme_symlink}")" = "${kitty_light_theme}" ];
+then
+  export KITTY_COLORS="light"
+  export GLAMOUR_STYLE=light
+else
+  export KITTY_COLORS="dark"
+  export GLAMOUR_STYLE=dark
+fi
+
+set_fzf_default_opts() {
+  if [[ $KITTY_COLORS == "light" ]]; then
+    export FZF_DEFAULT_OPTS='
+    --color=bg+:#DEECF9,bg:#FFFFFF,spinner:#3f5fff,hl:#586e75
+    --color=fg:#839496,header:#586e75,info:#cb4b16,pointer:#3f5fff
+    --color=marker:#3f5fff,fg+:#839496,prompt:#3f5fff,hl+:#3f5fff'
+  else
+    export FZF_DEFAULT_OPTS=''
+  fi
+}
+
+toggle_colors() {
+  if [[ $KITTY_COLORS == "light" ]]; then
+    export KITTY_COLORS="dark"
+    ln -sf "${kitty_dark_theme}" "${kitty_theme_symlink}"
+    export GLAMOUR_STYLE=dark
+  else
+    export KITTY_COLORS="light"
+    ln -sf "${kitty_light_theme}" "${kitty_theme_symlink}"
+    export GLAMOUR_STYLE=light
+  fi
+
+  # Kitty listens on a UNIX socket, so that we can send commands even while in
+  # tmux (which swallows the kitty escape codes)
+  for socket in /tmp/kitty*; do
+    kitty @ --to "unix:${socket}" set-colors -a -c "${kitty_theme_symlink}"
+  done
+
+  set_fzf_default_opts
+}
+
+if type nvim &> /dev/null; then
+  alias vim='nvim'
+  export EDITOR='nvim'
+  export PSQL_EDITOR='nvim -c"set filetype=sql"'
+  export GIT_EDITOR='nvim'
+else
+  export EDITOR='vim'
+  export PSQL_EDITOR='vim -c"set filetype=sql"'
+  export GIT_EDITOR='vim'
+fi
+
+if type fzf &> /dev/null && type rg &> /dev/null; then
+  export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*" --glob "!vendor/*"'
+  export FZF_CTRL_T_COMMAND='rg --files --hidden --follow --glob "!.git/*" --glob "!vendor/*"'
+  export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
+  set_fzf_default_opts
+fi
+
+if type bat &> /dev/null; then
+  export BAT_THEME=ansi
+fi
+
+
+if [ "$TMUX" = "" ]; then tmux -u attach -t main || tmux -u new -s main; fi

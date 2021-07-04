@@ -1,0 +1,4 @@
+.gnupg/.gpg-*-migrated
+.gnupg/**.kbx*
+*.swp
+.audio/

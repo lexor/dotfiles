@@ -12,7 +12,7 @@ Plug 'junegunn/fzf.vim'
 " Visual components
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
-Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline'
 
 " Languages
 Plug 'fatih/vim-go'
@@ -50,9 +50,39 @@ if (has("nvim"))
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 endif
 
-let g:gruvbox_contrast_dark = "hard"
-let g:gruvbox_contrast_light = "hard"
-colorscheme gruvbox
+let kitty_profile = $KITTY_COLORS
+
+if kitty_profile == "dark"
+  set background=dark
+
+  let g:gruvbox_contrast_dark = "hard"
+  colorscheme gruvbox
+
+  highlight LspDiagnosticsFloatingError guifg=#940000 guibg=NONE gui=bold
+  highlight LspDiagnosticsFloatingHint guifg=#569CD6 guibg=NONE
+  highlight LspDiagnosticsFloatingInformation guifg=#5e81ac guibg=NONE
+  highlight LspDiagnosticsFloatingWarning guifg=#ebcb8b guibg=NONE
+else
+  set background=light
+  let g:lucius_style  = 'light'
+  let g:lucius_contrast  = 'high'
+  let g:lucius_contrast_bg  = 'high'
+  let g:lucius_no_term_bg  = 1
+  colorscheme lucius
+  "colorscheme envy
+
+  " Give the active window a blue background and white foreground statusline
+  hi StatusLine ctermfg=15 ctermbg=32 guifg=#FFFFFF guibg=#005FAF gui=bold cterm=bold
+  hi SignColumn ctermfg=255 ctermbg=15 guifg=#E4E4E4 guibg=#FFFFFF
+
+  " Tweak popup colors
+  highlight Pmenu guibg=#E4E4E4 guifg=#000000
+
+  highlight link LspDiagnosticsFloatingError ErrorMsg
+  highlight link LspDiagnosticsFloatingWarning WarningMsg
+  highlight link LspDiagnosticsFloatingHint Directory
+  highlight link LspDiagnosticsFloatingInformation Directory
+endif
 
 " }}}
 " general {{{
