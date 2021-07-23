@@ -6,9 +6,15 @@ alias cl="clear;clear"
 alias lls='ls -lh --sort=size --reverse'
 alias llt='ls -l -snew'
 
+# Edit/Source vim config
+alias ez='vim ~/.zshrc'
+alias sz='source ~/.zshrc'
+
 # Git
 alias gc="_git_dbg commit -S -v -s"
 alias gs="_git_dbg status -s -b"
+alias gd='_git_dbg diff'
+alias gpr="_git_dbg pull --rebase"
 alias gdc="_git_dbg diff --cached"
 alias gpp='_git_dbg push lexor HEAD'
 alias gpem='_git_dbg push lexor HEAD'
@@ -26,6 +32,7 @@ alias undocommit="_git_dbg reset HEAD~"
 alias undopush="_git_dbg push -f origin HEAD^:master" # Undo a `git push`
 alias master="_git_dbg checkout master && git pull"
 alias dev="_git_dbg checkout develop && git pull"
+alias cdr='cd $(git rev-parse --show-toplevel)'
 alias lg="lazygit"
 
 # Tmux
@@ -40,6 +47,3 @@ alias a="php artisan"
 
 # PHP
 alias c="composer"
-
-alias hidedock="defaults write com.apple.dock autohide -bool true && killall Dock"
-alias showdock="defaults write com.apple.dock autohide -bool false && killall Dock"
