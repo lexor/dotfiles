@@ -41,9 +41,3 @@ alias tmn='tmux -u new -s'
 
 # Bat
 alias cat="bat"
-
-# Laravel
-alias a="php artisan"
-
-# PHP
-alias c="composer"
