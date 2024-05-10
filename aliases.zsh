@@ -3,6 +3,7 @@ alias vim="nvim"
 alias cl="clear;clear"
 
 # General
+alias la='ls -lah'
 alias lls='ls -lh --sort=size --reverse'
 alias llt='ls -l -snew'
 
