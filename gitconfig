@@ -5,6 +5,12 @@
 
 [alias]
   tree = log --oneline --decorate --graph
+  l = "!. ~/.githelpers && pretty_git_log"
+  la = "!git l --all"
+  lr = "!git l -30"
+  lra = "!git lr --all"
+  lg = "!git l -G $1 -- $2"
+  feature = !sh -c 'git checkout --no-track -b $0 origin/main'
 
 [gpg]
 	program = gpg
