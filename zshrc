@@ -137,8 +137,8 @@ case $OSTYPE in
   ;;
 esac
 
-if type lsd &> /dev/null; then
-  alias ls=lsd
+if type exa &> /dev/null; then
+  alias ls=exa
 fi
 
 alias lls='ls -lh --sort=size --reverse'
