@@ -1,6 +1,0 @@
-#!/usr/bin/env sh
-
-limelight -m config active_color 0xffffffff
-limelight -m config width 2
-
-echo "limelight configuration loaded.."
