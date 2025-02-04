@@ -1,6 +1,8 @@
 # Editors #
 ###########
-.vscode
+.vscode/*
+!.vscode/tasks.json
+!.vscode/extensions.json
 .idea
 *.swp
 *~
