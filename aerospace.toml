@@ -1,0 +1,120 @@
+start-at-login = true
+
+after-startup-command = []
+
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
+
+# Aerospace does not have BSP layout
+default-root-container-layout = 'tiles'
+default-root-container-orientation = 'auto'
+
+on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+
+automatically-unhide-macos-hidden-apps = true
+
+[key-mapping]
+preset = 'qwerty'
+
+[gaps]
+inner.horizontal = 0
+inner.vertical = 0
+outer.left = [{ monitor."LG HDR QHD" = 7 }, { monitor."LG HDR 4K" = 0 }, 7]
+outer.bottom = [{ monitor."LG HDR QHD" = 7 }, { monitor."LG HDR 4K" = 0 }, 7]
+outer.top = [{ monitor."LG HDR QHD" = 7 }, { monitor."LG HDR 4K" = 0 }, 7]
+outer.right = [{ monitor."LG HDR QHD" = 7 }, { monitor."LG HDR 4K" = 0 }, 7]
+
+[mode.main.binding]
+
+alt-enter = 'exec-and-forget open -n /Applications/Ghostty.app'
+
+# fast focus desktop
+cmd-alt-0 = 'workspace 0'
+cmd-alt-1 = 'workspace 1'
+cmd-alt-2 = 'workspace 2'
+cmd-alt-3 = 'workspace 3'
+cmd-alt-4 = 'workspace 4'
+cmd-alt-5 = 'workspace 5'
+cmd-alt-6 = 'workspace 6'
+cmd-alt-7 = 'workspace 7'
+cmd-alt-8 = 'workspace 8'
+cmd-alt-9 = 'workspace 9'
+
+# focus window
+alt-h = 'focus --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors left'
+alt-j = 'focus --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors down'
+alt-k = 'focus --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors up'
+alt-l = 'focus --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors right'
+
+# swap window
+shift-alt-h = 'swap left'
+shift-alt-j = 'swap down'
+shift-alt-k = 'swap up'
+shift-alt-l = 'swap right'
+
+# move window
+shift-cmd-h = 'move left'
+shift-cmd-j = 'move down'
+shift-cmd-k = 'move up'
+shift-cmd-l = 'move right'
+
+# send window to monitor and follow focus
+ctrl-cmd-z = 'move-node-to-monitor prev --focus-follows-window'
+ctrl-cmd-c = 'move-node-to-monitor next --focus-follows-window'
+ctrl-cmd-1 = 'move-node-to-monitor 1 --focus-follows-window'
+ctrl-cmd-2 = 'move-node-to-monitor 2 --focus-follows-window'
+ctrl-cmd-3 = 'move-node-to-monitor 3 --focus-follows-window'
+
+# send window to desktop and follow focus
+alt-shift-0 = 'move-node-to-workspace --focus-follows-window 0'
+alt-shift-1 = 'move-node-to-workspace --focus-follows-window 1'
+alt-shift-2 = 'move-node-to-workspace --focus-follows-window 2'
+alt-shift-3 = 'move-node-to-workspace --focus-follows-window 3'
+alt-shift-4 = 'move-node-to-workspace --focus-follows-window 4'
+alt-shift-5 = 'move-node-to-workspace --focus-follows-window 5'
+alt-shift-6 = 'move-node-to-workspace --focus-follows-window 6'
+alt-shift-7 = 'move-node-to-workspace --focus-follows-window 7'
+alt-shift-8 = 'move-node-to-workspace --focus-follows-window 8'
+alt-shift-9 = 'move-node-to-workspace --focus-follows-window 9'
+
+# reset layout
+shift-alt-r = 'flatten-workspace-tree'
+
+# increase window size
+shift-alt-a = 'resize width +20'
+shift-alt-d = 'resize height +20'
+
+# decrease window size
+shift-cmd-a = 'resize width -20'
+shift-cmd-d = 'resize height -20'
+
+# toggle window fullscreen zoom
+alt-f = 'fullscreen'
+
+# toggle window native fullscreen
+shift-alt-f = 'macos-native-fullscreen'
+
+[[on-window-detected]]
+if.app-id = "com.mitchellh.ghostty"
+run = ["layout tiling"]
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'finder'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.window-title-regex-substring = '.* Preferences'
+run = 'layout floating'
+
+
+[[on-window-detected]]
+if.window-title-regex-substring = 'Activity Monitor'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.window-title-regex-substring = '^Preview$'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.window-title-regex-substring = '1Password*'
+run = 'layout floating'
