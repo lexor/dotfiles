@@ -81,12 +81,12 @@ alt-shift-9 = 'move-node-to-workspace --focus-follows-window 9'
 shift-alt-r = 'flatten-workspace-tree'
 
 # increase window size
-shift-alt-a = 'resize width +20'
-shift-alt-d = 'resize height +20'
+shift-cmd-a = 'resize width +20'
+shift-alt-a = 'resize height +20'
 
 # decrease window size
-shift-cmd-a = 'resize width -20'
-shift-cmd-d = 'resize height -20'
+shift-cmd-d = 'resize width -20'
+shift-alt-d = 'resize height -20'
 
 # toggle window fullscreen zoom
 alt-f = 'fullscreen'
@@ -105,7 +105,6 @@ run = 'layout floating'
 [[on-window-detected]]
 if.window-title-regex-substring = '.* Preferences'
 run = 'layout floating'
-
 
 [[on-window-detected]]
 if.window-title-regex-substring = 'Activity Monitor'
